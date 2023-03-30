@@ -45,7 +45,6 @@ app.get('/data', (req, res) => {
   app.post("/register",(req,res)=>{
 
     const { Fname, username, email, phone, password, gender,hobbies,image } = req.body;
-    res.status(200).json({ message: "User registered successfully" });
 
 
     pool.query("INSERT INTO editors (full_name, username, email, phone_number, password,gender,hobbies,image) VALUES (?,?, ?, ?, ?, ?, ?, ?)",
