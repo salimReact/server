@@ -60,6 +60,23 @@ app.get('/data', (req, res) => {
     }
     );
   });
+  app.post("/registerAnnoncer",(req,res)=>{
+
+    const { Fname, email, phone, password, gender,companyName,companyEmail,companyPhone,companyDomaine,companyType } = req.body;
+
+
+    pool.query("INSERT INTO annoncers (full_name, email, phone, password,gender,companyName,companyEmail,companyPhone,companyDomaine,companyType) VALUES (?,?,?,?,?,?,?,?,?,?)",
+    [Fname,email,phone,password,gender,companyName,companyEmail,companyPhone,companyDomaine,companyType],
+    (err,result) => {
+      if (err) {
+        console.log(err);
+        res.status(500).json({ message: "Error registering user" });
+      } else {
+        res.status(200).json({ message: "User registered successfully" });
+      }
+    }
+    );
+  });
   app.post("/login",(req,res)=>{
      const { email, password } = req.body;
   
