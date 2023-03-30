@@ -3,6 +3,12 @@ const app = express();
 const mysql = require('mysql2');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const dataRoute = require('./routes/data');
+const registerRoute = require('./routes/register');
+const registerAnnoncerRoute = require('./routes/registerAnnoncer');
+const loginRoute = require('./routes/login');
+
+
 
 
 app.use(cors());
@@ -18,82 +24,14 @@ const pool = mysql.createPool({
     database: 'sys'
   });
 
-  app.get('/', (req, res) => {
-res.send('sello');
-  })
-app.get('/data', (req, res) => {
-    pool.getConnection((err, connection) => {
-      if (err) {
-        console.error('Error connecting to database: ', err);
-        res.status(500).send('Internal server error');
-        return;
-      }
+
+app.use('/data', dataRoute);
+app.use('/register', registerRoute);
+app.use('/registerAnnoncer', registerAnnoncerRoute);
+app.use('/login', loginRoute);
+
   
-      connection.query('SELECT * FROM editors', (err, rows) => {
-        connection.release(); // release the connection back to the pool
-        if (err) {
-          console.error('Error executing query: ', err);
-          res.status(500).send('Internal server error');
-          return;
-        }
-  
-        // Send the retrieved data as JSON
-        res.json(rows);
-      });
-    });
-  });
-  app.post("/register",(req,res)=>{
-
-    const { Fname, username, email, phone, password, gender,hobbies,image } = req.body;
-
-
-    pool.query("INSERT INTO editors (full_name, username, email, phone_number, password,gender,hobbies,image) VALUES (?,?, ?, ?, ?, ?, ?, ?)",
-    [Fname,username,email,phone,password,gender,JSON.stringify(hobbies),image],
-    (err,result) => {
-      if (err) {
-        console.log(err);
-        res.status(500).json({ message: "Error registering user" });
-      } else {
-        res.status(200).json({ message: "User registered successfully" });
-      }
-    }
-    );
-  });
-  app.post("/registerAnnoncer",(req,res)=>{
-
-    const { Fname, email, phone, password, gender,companyName,companyEmail,companyPhone,companyDomaine,companyType } = req.body;
-
-
-    pool.query("INSERT INTO annoncers (full_name, email, phone, password,gender,companyName,companyEmail,companyPhone,companyDomaine,companyType) VALUES (?,?,?,?,?,?,?,?,?,?)",
-    [Fname,email,phone,password,gender,companyName,companyEmail,companyPhone,companyDomaine,companyType],
-    (err,result) => {
-      if (err) {
-        console.log(err);
-        res.status(500).json({ message: "Error registering user" });
-      } else {
-        res.status(200).json({ message: "User registered successfully" });
-      }
-    }
-    );
-  });
-  app.post("/login",(req,res)=>{
-     const { email, password } = req.body;
-  
-    pool.query("SELECT * FROM editors WHERE email = ? AND password = ?",
-      [email, password],
-      (err, result) => {
-        if (err) {
-          res.send({ err: err });     
-        } else {
-          if (result.length > 0) {
-            res.send({ message: "Login successful" });
-          } else {
-            res.send({ message: "Wrong email or password" });
-          }
-        }
-        
-      }
-    );
-  });
+ 
+ 
 app.listen(3000, ()=>   console.log('Server listening on port 3000')
 )
