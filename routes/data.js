@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const mysql = require('mysql2');
+const path = require('path');
+
 
 // create the connection to database
 const pool = mysql.createPool({
@@ -19,7 +21,7 @@ router.get('/', (req, res) => {
       return;
     }
 
-    connection.query('SELECT * FROM editors', (err, rows) => {
+    connection.query('SELECT id ,full_name, username, email, phone_number, gender, hobbies, image FROM editors', (err, rows) => {
       connection.release(); // release the connection back to the pool
       if (err) {
         console.error('Error executing query: ', err);
@@ -28,7 +30,19 @@ router.get('/', (req, res) => {
       }
 
       // Send the retrieved data as JSON
-      res.json(rows);
+      const editedRows = rows.map(row => {
+        return { 
+          id: row.id, 
+          full_name: row.full_name, 
+          username: row.username, 
+          email: row.email, 
+          phone_number: row.phone_number, 
+          gender: row.gender, 
+          hobbies: JSON.parse(row.hobbies), 
+          image: row.image 
+        };
+      });
+      res.json(editedRows);
     });
   });
 });

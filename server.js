@@ -7,6 +7,8 @@ const dataRoute = require('./routes/data');
 const registerAnnoncerRoute = require('./routes/registerAnnoncer');
 const loginRoute = require('./routes/login');
 const registerRoute = require('./routes/register');
+const path = require('path');
+
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -25,6 +27,6 @@ app.use('/data', dataRoute);
 app.use('/register', registerRoute);
 app.use('/registerAnnoncer', registerAnnoncerRoute);
 app.use('/login', loginRoute);
-
+app.use('/images', express.static('Images'));
 app.listen(3000, ()=>   console.log('Server listening on port 3000')
 )
