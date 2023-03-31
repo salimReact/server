@@ -11,13 +11,23 @@ const pool = mysql.createPool({
   database: 'sys'
 });
 
+const crypto = require('crypto');
+const hashPassword = (password) => {
+  const salt = 'somerandomstring'; 
+  const hash = crypto.createHmac('sha256', salt)
+                   .update(password)
+                   .digest('hex');
+  return hash;
+};
 
 
 router.post("/",(req,res)=>{
     const { email, password } = req.body;
+    const hashedPassword = hashPassword(password); 
+
  
    pool.query("SELECT * FROM editors WHERE email = ? AND password = ?",
-     [email, password],
+     [email, hashedPassword],
      (err, result) => {
        if (err) {
          res.send({ err: err });     
