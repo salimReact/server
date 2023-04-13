@@ -33,7 +33,8 @@ router.post("/",(req,res)=>{
          res.send({ err: err });     
        } else {
          if (result.length > 0) {
-           res.send({ message: "Login successful" });
+          const userId = result[0].id;
+           res.send({ message: "Login successful" , userId: userId });
          } else {
            res.send({ message: "Wrong email or password" });
          }
