@@ -10,13 +10,23 @@ const pool = mysql.createPool({
   password: '123456789',
   database: 'sys'
 });
+const hashPassword = (password) => {
+  const salt = 'somerandomstring'; 
+  const hash = crypto.createHmac('sha256', salt)
+                   .update(password)
+                   .digest('hex');
+  return hash;
+};
+
 
 router.put('/:id', (req, res) => {
     const id = req.params.id;
-    const { Fname, username, email, phone, password } = req.body;
+    const { Fname, username, email, phone, newpassword} = req.body;
+    const hashedPassword = hashPassword(newpassword); 
+
     pool.query(
         'UPDATE editors SET full_name = ?, username = ?, email = ?, phone_number = ?, password = ? WHERE id = ?'
-        ,[Fname, username, email, phone, password, id],
+        ,[Fname, username, email, phone, hashedPassword, id],
                 (err, result) => {
             if (err) {
                 console.error(err);
