@@ -21,12 +21,11 @@ const hashPassword = (password) => {
 
 router.put('/:id', (req, res) => {
     const id = req.params.id;
-    const { Fname, username, email, phone, newpassword} = req.body;
-    const hashedPassword = hashPassword(newpassword); 
+    const { Fname, username, email, phone , aboutme} = req.body;
 
     pool.query(
-        'UPDATE editors SET full_name = ?, username = ?, email = ?, phone_number = ?, password = ? WHERE id = ?'
-        ,[Fname, username, email, phone, hashedPassword, id],
+        'UPDATE editors SET full_name = ?, username = ?, email = ?, phone_number = ? , aboutMe = ?  WHERE id = ?'
+        ,[Fname, username, email, phone, aboutme, id],
                 (err, result) => {
             if (err) {
                 console.error(err);
