@@ -9,6 +9,10 @@ const loginRoute = require('./routes/login');
 const registerRoute = require('./routes/register');
 const profileRoute = require('./routes/profile');
 const updateUserRoute = require('./routes/updateUser');
+const updateUserPasswordRoute = require('./routes/updateUserPassword');
+const checkPasswordRoute = require('./routes/checkPassword');
+
+
 const path = require('path');
 
 app.use(cors());
@@ -31,6 +35,10 @@ app.use('/register', registerRoute);
 app.use('/registerAnnoncer', registerAnnoncerRoute);
 app.use('/login', loginRoute);
 app.use('/updateUser', updateUserRoute);
+app.use('/updateUserPassword', updateUserPasswordRoute);
+app.use('/checkPassword', checkPasswordRoute);
+
+
 
 app.use('/images', express.static('Images'));
 app.listen(3000, ()=>   console.log('Server listening on port 3000')
