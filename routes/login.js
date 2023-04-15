@@ -26,7 +26,7 @@ router.post("/",(req,res)=>{
     const hashedPassword = hashPassword(password); 
 
  
-   pool.query("SELECT * FROM editors WHERE email = ? AND password = ?",
+   pool.query("SELECT * FROM users WHERE email = ? AND password = ?",
      [email, hashedPassword],
      (err, result) => {
        if (err) {

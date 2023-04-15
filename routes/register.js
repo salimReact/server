@@ -34,12 +34,12 @@ const storage = multer.diskStorage({
   const upload = multer({ storage: storage });
   
   router.post('/', upload.single('image'), (req, res) => {
-    const { Fname, username, email, phone, password, gender, hobbies } = req.body;
+    const { Fname, username, email, phone, password, gender, community_type } = req.body;
     const imagePath = req.file.filename; 
     const hashedPassword = hashPassword(password); 
   
-    pool.query("INSERT INTO editors (full_name, username, email, phone_number, password, gender, hobbies, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-      [Fname, username, email, phone, hashedPassword, gender, JSON.stringify(hobbies), imagePath],
+    pool.query("INSERT INTO user (full_name, username, email, phone_number, password, gender, community_type, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+      [Fname, username, email, phone, hashedPassword, gender, JSON.stringify(community_type), imagePath],
       (err, result) => {
         if (err) {
           console.log(err);

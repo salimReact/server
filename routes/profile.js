@@ -12,18 +12,10 @@ const pool = mysql.createPool({
   database: 'sys'
 });
 
-const hashPassword = (password) => {
-  const salt = 'somerandomstring'; 
-  const hash = crypto.createHmac('sha256', salt)
-                   .update(password)
-                   .digest('hex');
-  return hash;
-};
-
 router.get("/:userId", (req, res) => {
   const userId = req.params.userId;
 
-  pool.query("SELECT * FROM editors WHERE id = ?", [userId], (err, result) => {
+  pool.query("SELECT * FROM users u JOIN editor_details ed ON u.id = ed.user_id;", [userId], (err, result) => {
     if (err) {
       res.send({ err: err });     
     } else {
