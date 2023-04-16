@@ -25,7 +25,7 @@ router.put('/:id', (req, res) => {
     const hashedPassword = hashPassword(newpassword);
 
     pool.query(
-        'UPDATE editors SET password = ?  WHERE id = ?'
+        'UPDATE users SET password = ?  WHERE id = ?'
         ,[hashedPassword, id],
                 (err, result) => {
             if (err) {
