@@ -4,15 +4,16 @@ const mysql = require('mysql2');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const dataController = require('./routes/controllers/dataController');
-const loginRoute = require('./routes/login');
-const registerRoute = require('./routes/register');
-const profileRoute = require('./routes/profile');
+const loginController = require('./routes/controllers/loginController');
+const registerController = require('./routes/controllers/registerController');
+const profileController = require('./routes/controllers/profileController');
 const updateUserRoute = require('./routes/updateUser');
 const updateUserPasswordRoute = require('./routes/updateUserPassword');
-const checkPasswordRoute = require('./routes/checkPassword');
-
-
+const checkPasswordController = require('./routes/controllers/checkPasswordController');
 const path = require('path');
+const uploadImage = require('./routes/middleware/uploadImage');
+
+
 
 app.use(cors());
 app.use(express.json());
@@ -29,12 +30,12 @@ const pool = mysql.createPool({
 
 
 app.use('/data', dataController.getData);
-app.use('/profile', profileRoute);
-app.use('/register', registerRoute);
-app.use('/login', loginRoute);
+app.use('/profile/:id', profileController.getUserById);
+app.use('/register', uploadImage.single('image') , registerController.registerUser);
+app.use('/login', loginController);
 app.use('/updateUser', updateUserRoute);
 app.use('/updateUserPassword', updateUserPasswordRoute);
-app.use('/checkPassword', checkPasswordRoute);
+app.use('/checkPassword/:id', checkPasswordController.password);
 
 
 
