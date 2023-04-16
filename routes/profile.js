@@ -15,7 +15,7 @@ const pool = mysql.createPool({
 router.get("/:userId", (req, res) => {
   const userId = req.params.userId;
 
-  pool.query("SELECT * FROM users u JOIN editor_details ed ON u.id = ed.user_id;", [userId], (err, result) => {
+  pool.query("SELECT * FROM users u LEFT JOIN editor_details ed ON u.id = ed.user_id LEFT JOIN announcer_details ad ON u.id = ad.user_id WHERE id=? ; ", [userId], (err, result) => {
     if (err) {
       res.send({ err: err });     
     } else {

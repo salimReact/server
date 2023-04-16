@@ -36,15 +36,14 @@ router.get('/', (req, res) => {
           email: row.email, 
           phone_number: row.phone_number, 
           gender: row.gender,
-          image: row.image
-
+          image: row.image,
         };
         
-        if (row.role === 1) {
+        if (row.role === "1") {
           editedRow.username = row.username;
           editedRow.community_type = JSON.parse(row.community_type);
           editedRow.age = row.age;
-        } else if (row.role === 2) {
+        } else if (row.role === "2") {
           editedRow.companyName = row.companyName;
           editedRow.companyType = row.companyType;
         }
