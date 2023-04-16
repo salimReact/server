@@ -3,8 +3,7 @@ const app = express();
 const mysql = require('mysql2');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const dataRoute = require('./routes/data');
-const registerAnnoncerRoute = require('./routes/registerAnnoncer');
+const dataController = require('./routes/controllers/dataController');
 const loginRoute = require('./routes/login');
 const registerRoute = require('./routes/register');
 const profileRoute = require('./routes/profile');
@@ -29,10 +28,9 @@ const pool = mysql.createPool({
   });
 
 
-app.use('/data', dataRoute);
+app.use('/data', dataController.getData);
 app.use('/profile', profileRoute);
 app.use('/register', registerRoute);
-app.use('/registerAnnoncer', registerAnnoncerRoute);
 app.use('/login', loginRoute);
 app.use('/updateUser', updateUserRoute);
 app.use('/updateUserPassword', updateUserPasswordRoute);
