@@ -46,7 +46,6 @@ router.post('/', upload.single('image'), (req, res) => {
         res.status(500).json({ message: "Error registering user" });
       } else {
         const user_id = result.insertId;
-
         if (role === '1') {
           pool.query("INSERT INTO editor_details (user_id, username, community_type) VALUES (?, ?, ?)",
             [user_id, username, JSON.stringify(community_type)],
