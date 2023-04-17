@@ -7,8 +7,8 @@ const dataController = require('./routes/controllers/dataController');
 const loginController = require('./routes/controllers/loginController');
 const registerController = require('./routes/controllers/registerController');
 const profileController = require('./routes/controllers/profileController');
-const updateUserRoute = require('./routes/updateUser');
-const updateUserPasswordRoute = require('./routes/updateUserPassword');
+const updateUserController = require('./routes/controllers/updateUserController');
+const updateUserPasswordController = require('./routes/controllers/updateUserPasswordController');
 const checkPasswordController = require('./routes/controllers/checkPasswordController');
 const path = require('path');
 const uploadImage = require('./routes/middleware/uploadImage');
@@ -33,8 +33,8 @@ app.use('/data', dataController.getData);
 app.use('/profile/:id', profileController.getUserById);
 app.use('/register', uploadImage.single('image') , registerController.registerUser);
 app.use('/login', loginController);
-app.use('/updateUser', updateUserRoute);
-app.use('/updateUserPassword', updateUserPasswordRoute);
+app.use('/updateUser/:id', updateUserController.updateUser);
+app.use('/updateUserPassword/:id', updateUserPasswordController.updatePassword);
 app.use('/checkPassword/:id', checkPasswordController.password);
 
 
