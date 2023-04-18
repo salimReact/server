@@ -38,9 +38,11 @@ exports.getData = (callback) => {
           editedRow.username = row.username;
           editedRow.community_type = JSON.parse(row.community_type);
           editedRow.age = row.age;
+          editedRow.ed_id = row.ed_id;
         } else if (row.role === "2") {
           editedRow.companyName = row.companyName;
           editedRow.companyType = row.companyType;
+          editedRow.an_id = row.an_id;
         }
         
         return editedRow;

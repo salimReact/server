@@ -12,6 +12,7 @@ const updateUserController = require('./routes/controllers/updateUserController'
 const updateUserPasswordController = require('./routes/controllers/updateUserPasswordController');
 const checkPasswordController = require('./routes/controllers/checkPasswordController');
 const addCampaignController = require('./routes/controllers/campaignController');
+const getCampaignController = require('./routes/controllers/getCampaignController');
 const uploadImage = require('./routes/middleware/uploadImage');
 
 
@@ -38,6 +39,8 @@ app.use('/updateUser/:id', updateUserController.updateUser);
 app.use('/updateUserPassword/:id', updateUserPasswordController.updatePassword);
 app.use('/checkPassword/:id', checkPasswordController.password);
 app.use('/addCampaign', addCampaignController.addCampaignController);
+app.get('/campaignData', getCampaignController);
+
 
 app.use('/images', express.static('Images'));
 app.listen(3000, ()=>   console.log('Server listening on port 3000')
