@@ -11,7 +11,7 @@ const profileController = require('./routes/controllers/profileController');
 const updateUserController = require('./routes/controllers/updateUserController');
 const updateUserPasswordController = require('./routes/controllers/updateUserPasswordController');
 const checkPasswordController = require('./routes/controllers/checkPasswordController');
-const { addCampaignController } = require('./routes/controllers/campaignController');
+const addCampaignController = require('./routes/controllers/campaignController');
 const uploadImage = require('./routes/middleware/uploadImage');
 
 
@@ -37,7 +37,7 @@ app.use('/login', loginController);
 app.use('/updateUser/:id', updateUserController.updateUser);
 app.use('/updateUserPassword/:id', updateUserPasswordController.updatePassword);
 app.use('/checkPassword/:id', checkPasswordController.password);
-app.use('/addCampaign', addCampaignController);
+app.use('/addCampaign', addCampaignController.addCampaignController);
 
 app.use('/images', express.static('Images'));
 app.listen(3000, ()=>   console.log('Server listening on port 3000')
