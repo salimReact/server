@@ -32,6 +32,7 @@ exports.getData = (callback) => {
           phone_number: row.phone_number, 
           gender: row.gender,
           image: row.image,
+          role : row.role,
         };
         
         if (row.role === "1") {
