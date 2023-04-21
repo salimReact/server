@@ -13,6 +13,7 @@ const updateUserPasswordController = require('./routes/controllers/updateUserPas
 const checkPasswordController = require('./routes/controllers/checkPasswordController');
 const addCampaignController = require('./routes/controllers/campaignController');
 const getCampaignController = require('./routes/controllers/getCampaignController');
+const offersController = require('./routes/controllers/getOffersController');
 const addIdToCampaignController = require('./routes/controllers/addIdToCampaignController');
 
 const uploadImage = require('./routes/middleware/uploadImage');
@@ -42,6 +43,7 @@ app.use('/updateUserPassword/:id', updateUserPasswordController.updatePassword);
 app.use('/checkPassword/:id', checkPasswordController.password);
 app.use('/addCampaign', addCampaignController.addCampaignController);
 app.get('/campaignData', getCampaignController);
+app.use('/getOfferByEdId/:id', offersController.getOfferByEdId);
 app.use('/addIdToCampaign/:id', addIdToCampaignController.addIdToCampaignController);
 
 
