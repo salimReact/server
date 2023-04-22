@@ -15,6 +15,10 @@ const addCampaignController = require('./routes/controllers/campaignController')
 const getCampaignController = require('./routes/controllers/getCampaignController');
 const offersController = require('./routes/controllers/getOffersController');
 const addIdToCampaignController = require('./routes/controllers/addIdToCampaignController');
+const devisController = require('./routes/controllers/devisController');
+const messagesController = require('./routes/controllers/messagesController');
+const contractController = require('./routes/controllers/contractController');
+
 
 const uploadImage = require('./routes/middleware/uploadImage');
 
@@ -45,6 +49,11 @@ app.use('/addCampaign', addCampaignController.addCampaignController);
 app.get('/campaignData', getCampaignController);
 app.use('/getOfferByEdId/:id', offersController.getOfferByEdId);
 app.use('/addIdToCampaign/:id', addIdToCampaignController.addIdToCampaignController);
+app.use('/addDevis', devisController.addDevis);
+app.use('/addMessage', messagesController.addMessage);
+app.use('/Contract', contractController.addContract);
+
+
 
 
 
