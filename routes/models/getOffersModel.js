@@ -13,7 +13,7 @@ exports.getOfferByEdId = async (edId) => {
     const query = `
       SELECT *
       FROM campaign
-      WHERE FIND_IN_SET(?, id_list)
+      WHERE FIND_IN_SET(?, inv_list)
     `;
     const [rows] = await pool.promise().execute(query, [edId]);
     return rows;
