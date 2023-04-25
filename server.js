@@ -20,6 +20,7 @@ const devisController = require('./routes/controllers/devisController');
 const messagesController = require('./routes/controllers/messagesController');
 const contractController = require('./routes/controllers/contractController');
 const { getDevisController } = require('./routes/controllers/getDevisController');
+const { getMessageController } = require('./routes/controllers/getMessagesController');
 
 
 
@@ -55,6 +56,7 @@ app.use('/addIdToCampaign/:id', addIdToCampaignController.addIdToCampaignControl
 app.use('/addIdToListId/:id', addIdToListIdConstroller.addIdToListIdConstroller);
 app.use('/addDevis', devisController.addDevis);
 app.use('/getDevis', getDevisController);
+app.use('/getMessage', getMessageController);
 app.use('/addMessage', messagesController.addMessage);
 app.use('/Contract', contractController.addContract);
 
