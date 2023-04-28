@@ -23,7 +23,7 @@ const contractController = require('./routes/controllers/contractController');
 const { getDevisController } = require('./routes/controllers/getDevisController');
 const { getMessageController } = require('./routes/controllers/getMessagesController');
 const { getContractController } = require('./routes/controllers/getContractController');
-
+const {updateDevisStatusController} = require('./routes/controllers/updateDevisStatusController');
 
 
 const uploadImage = require('./routes/middleware/uploadImage');
@@ -50,6 +50,7 @@ app.use('/register', uploadImage.single('image') , registerController.registerUs
 app.use('/login', loginController);
 app.use('/updateUser/:id', updateUserController.updateUser);
 app.use('/updateContractStatus/:id', updateContractStatusController);
+app.use('/updateDevisStatus/:id', updateDevisStatusController);
 app.use('/updateUserPassword/:id', updateUserPasswordController.updatePassword);
 app.use('/checkPassword/:id', checkPasswordController.password);
 app.use('/addCampaign', addCampaignController.addCampaignController);
