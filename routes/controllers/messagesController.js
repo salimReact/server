@@ -1,11 +1,11 @@
-const messagesModel = require('../models/messagesModel');
+const addMessage = require('../models/messagesModel');
 
 exports.addMessage = function(req, res) {
   const message = req.body.message;
-  const id_sender = req.body.id_sender;
-  const id_receiver = req.body.id_receiver;
+  const senderId = req.body.sender;
+  const receiverId = req.body.receiver;
 
-  messagesModel.addMessage(message, id_sender, id_receiver)
+  addMessage.addMessage(message, senderId, receiverId)
     .then((messageId) => {
       res.status(200).send(`Message added with ID: ${messageId}`);
     })
