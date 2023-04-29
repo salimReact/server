@@ -2,8 +2,8 @@ const { addIdToCampaignModel } = require('../models/addIdToCampaignModel');
 
 function addIdToCampaignController(req, res) {
   const campaignId = req.params.id; 
-  const id = req.body.id; 
-  addIdToCampaignModel(campaignId, id, (error, result) => {
+  const edid = req.body.edid; 
+  addIdToCampaignModel(campaignId, edid, (error, result) => {
     if (error) {
       console.error(error);
       return res.status(500).send('Error adding ID to campaign');

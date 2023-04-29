@@ -17,10 +17,9 @@ async function getCampaignModel() {
     // modify the rows to replace the id_list value with the number of IDs
     const modifiedRows = rows.map(row => {
       const idList = row.id_list || ''; // handle cases where id_list is null or undefined
-      const idCount = idList.split(',').length;
+      const idCount = idList.trim() !== '' ? idList.split(',').length : 0; // handle cases where idList is an empty string
       return { ...row, editorsCount: idCount };
     });
-    
     return modifiedRows;
   } catch (error) {
     throw new Error(`Unable to get campaign data: ${error}`);
