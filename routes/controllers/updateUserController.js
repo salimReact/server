@@ -3,8 +3,8 @@ const userModel = require('../models/updateUserModel');
 function updateUser(req, res) {
   const id = req.params.id;
   const data = req.body;
-
-  userModel.updateUser(id, data, (err, result) => {
+  const role = req.query.role;
+  userModel.updateUser(id, data, role, (err, result) => {
     if (err) {
       res.status(500).send('Error updating data');
     } else {
