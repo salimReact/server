@@ -24,6 +24,7 @@ const { getDevisController } = require('./routes/controllers/getDevisController'
 const { getMessageController } = require('./routes/controllers/getMessagesController');
 const { getContractController } = require('./routes/controllers/getContractController');
 const {updateDevisStatusController} = require('./routes/controllers/updateDevisStatusController');
+const deleteUser = require('./routes/DeleteUser');
 
 
 const uploadImage = require('./routes/middleware/uploadImage');
@@ -64,6 +65,8 @@ app.use('/getMessage', getMessageController);
 app.use('/getContract', getContractController);
 app.use('/addMessage', messagesController.addMessage);
 app.use('/Contract', contractController.addContract);
+app.delete('/deleteUser/:id', deleteUser);
+
 
 
 
